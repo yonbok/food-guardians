@@ -24,7 +24,10 @@ Rails.application.routes.draw do
 }
   root :to =>"homes#top"
     get '/about' => 'homes#about'
+    get  '/customers/check' => 'customers#check'
+    patch  '/customers/withdraw' => 'customers#withdraw'
     resources :items, only: [:index, :show]
+
 
   # 消費者ゲストログイン用
   devise_scope :customer do
