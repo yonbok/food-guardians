@@ -11,13 +11,20 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
+  get '/' => 'homes#top'
+  resources :items, except: [:destroy]
+  resources :genres, only: [:index, :create, :edit, :update]
+  resources :customers, only: [:index, :show, :edit, :update]
 
-  # 顧客用
+  # 消費者用
   # URL /customers/sign_in ...
   devise_for :customers, skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+  root :to =>"homes#top"
+    get '/about' => 'homes#about'
+    resources :items, only: [:index, :show]
 
   # 消費者ゲストログイン用
   devise_scope :customer do

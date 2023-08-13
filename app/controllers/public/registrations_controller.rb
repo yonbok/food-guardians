@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+  def after_sign_up_path_for(resource)
+    flash[:notice] = 'ログインに成功しました'
+    customer_path(@customer)
+  end
   # GET /resource/sign_up
   # def new
   #   super
@@ -59,4 +63,9 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+   private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :kana_name, :email, :post_code, :address, :phone_number, :encrypted_password])
+  end
 end
