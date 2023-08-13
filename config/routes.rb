@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   registrations: "exective/registrations",
   sessions: 'exective/sessions'
   }
+  get '/' => 'homes#top'
+  get  '/customers/check' => 'customers#check'
+  patch  '/customers/withdraw' => 'customers#withdraw'
+
 
   # 管理者用
   # URL /admin/sign_in ...
@@ -15,6 +19,7 @@ Rails.application.routes.draw do
   resources :items, except: [:destroy]
   resources :genres, only: [:index, :create, :edit, :update]
   resources :customers, only: [:index, :show, :edit, :update]
+
 
   # 消費者用
   # URL /customers/sign_in ...

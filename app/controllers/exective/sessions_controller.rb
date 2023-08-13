@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Exective::SessionsController < Devise::SessionsController
+  before_action :reject_exective, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -29,6 +30,23 @@ class Exective::SessionsController < Devise::SessionsController
     exective = Exective.guest
     sign_in exective
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+
+  protected
+
+  def reject_exective
+    @exective = Exective.find_by(email: params[:exective][:email])
+    if @exective
+      if @exective.valid_password?(params[:exective][:password]) && (@exective.is_deleted == true)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください"
+        redirect_to new_exective_registration_path
+      else
+        flash[:notice] = "項目を入力してください"
+      end
+    else
+      flash[:notice] = "該当するユーザーが見つかりません"
+    end
   end
 
 end
