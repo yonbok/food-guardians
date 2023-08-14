@@ -10,7 +10,155 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container">
+          <a class="navbar-brand p-3" href="<%= customer_session_path %>">
+           <%#= image_tag('nagano (2).png', size: "130x100") %>
+          </a>
+          <ul class="navbar-nav ml-auto ">
+            <% if admin_signed_in? %>
+              <%# if request.fullpath.include? "/admin" %>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "商品一覧", admin_items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "会員一覧", admin_customers_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "注文履歴一覧", admin_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "ジャンル一覧", admin_genres_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-right-from-bracket" style="color: white;" ></i>
+                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                  </div>
+                </li>
+              <%# else %>
+              <%# end %>
+            <% elsif customer_signed_in? %>
+                <li style="width:300px; margin:0 auto;">
+                  ようこそ、<%= current_customer.last_name %>さん！
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                   <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                   <%= link_to "マイページ", customer_path(current_customer) %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "商品一覧", items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "カート", cart_items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-right-from-bracket" style="color: white;" ></i>
+                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+                  </div>
+                </li>
+
+              <% elsif exective_signed_in? %>
+                <li style="width:300px; margin:0 auto;">
+                  ようこそ、<%= current_exective.name %>さん！
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                   <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                   <%= link_to "マイページ", exective_session_path(current_exective) %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "商品一覧", items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-right-from-bracket" style="color: white;" ></i>
+                    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+                  </div>
+                </li>
+
+              <% elsif customer_signed_out? %>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "About", about_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "商品一覧", items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "新規登録", new_customer_registration_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-right-to-bracket" style="color: white;" ></i>
+                    <%= link_to "ログイン", new_customer_session_path %>
+                  </div>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "About", about_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-hot" style="color: white;" ></i>
+                    <%= link_to "商品一覧", items_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-mug-saucer" style="color: white;" ></i>
+                    <%= link_to "新規登録", new_exective_registration_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
+                    <i class="fa-solid fa-right-to-bracket" style="color: white;" ></i>
+                    <%= link_to "ログイン", new_exective_session_path %>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

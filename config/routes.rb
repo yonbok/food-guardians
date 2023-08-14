@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   registrations: "exective/registrations",
   sessions: 'exective/sessions'
   }
-  get '/' => 'homes#top'
-  get  '/customers/check' => 'customers#check'
-  patch  '/customers/withdraw' => 'customers#withdraw'
+  scope module: :exective do
+    get '/' => 'homes#top'
+    get  '/customers/check' => 'customers#check'
+    patch  '/customers/withdraw' => 'customers#withdraw'
+    resources :items, except: [:destroy]
+  end
 
 
   # 管理者用
@@ -15,11 +18,12 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
   sessions: "admin/sessions"
 }
-  get '/' => 'homes#top'
-  resources :items, except: [:destroy]
-  resources :genres, only: [:index, :create, :edit, :update]
-  resources :customers, only: [:index, :show, :edit, :update]
-
+  namespace :admin do
+    get '/' => 'homes#top'
+    resources :items, except: [:destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+  end
 
   # 消費者用
   # URL /customers/sign_in ...
@@ -27,11 +31,13 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  root :to =>"homes#top"
+  scope module: :public do
+    root :to =>"homes#top"
     get '/about' => 'homes#about'
     get  '/customers/check' => 'customers#check'
     patch  '/customers/withdraw' => 'customers#withdraw'
     resources :items, only: [:index, :show]
+  end
 
 
   # 消費者ゲストログイン用

@@ -3,6 +3,10 @@ class Item < ApplicationRecord
   belongs_to :genre, optional: true
   has_many :order_datails
   validates :price, presence: true
+  validates :name, presence: true
+  validates :description, presence: true
+  validate :item_image
+
 
  def price_including_tax
   (price * 1.1).floor  # 税率を10%として計算して切り捨て

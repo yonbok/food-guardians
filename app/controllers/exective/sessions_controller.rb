@@ -2,6 +2,10 @@
 
 class Exective::SessionsController < Devise::SessionsController
   before_action :reject_exective, only: [:create]
+
+  def new
+    @exective = Exective.new
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
