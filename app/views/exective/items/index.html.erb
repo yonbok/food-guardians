@@ -1,1 +1,38 @@
-<h2>商品一覧</h2>
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <h2>商品一覧</h2>
+    <div class="ml-auto">
+      <%= link_to '商品新規登録', new_item_path, class: 'btn', style: 'background-color: #E4FF8D;' %>
+    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th>商品ID</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+           <tr>
+            <td><%= item.id %></td>
+            <td><%= link_to item.name, items_index_path(item) %></td>
+            <td><%= item.price.to_s(:delimited) %></td>
+            <td style="margin-left:90px; color:green;">
+            <%#= item.is_active ? '販売中' : '販売停止中' %></td>
+            </td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%#= paginate @items %>
+  </div>
+</div>
+
+
+
