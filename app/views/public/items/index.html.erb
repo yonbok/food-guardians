@@ -4,7 +4,7 @@
       <% @items.each do |item| %>
         <div class="col-sm-4 mb-4">
           <div class="card h-100">
-            <%= link_to item_path(item.id) do %>
+            <%= link_to customer_path(item.id) do %>
               <%= image_tag url_for(item.image), class: "card-img-top", style: "object-fit: contain; height: 200px;" %>
             <% end %>
             <div class="card-body">
