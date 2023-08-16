@@ -21,10 +21,10 @@
           <% @items.each do |item| %>
            <tr>
             <td><%= item.id %></td>
-            <td><%= link_to item.name, items_index_path(item) %></td>
+            <td><%= link_to item.name, item_path(item) %></td>
             <td><%= item.price.to_s(:delimited) %></td>
             <td style="margin-left:90px; color:green;">
-            <%#= item.is_active ? '販売中' : '販売停止中' %></td>
+            <%= item.is_active ? '販売中' : '販売停止中' %></td>
             </td>
            </tr>
           <% end %>

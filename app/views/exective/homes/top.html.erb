@@ -1,0 +1,16 @@
+<h2>新着商品</h2>
+      <div class="new-items" style="display: flex; flex-wrap: wrap; justify-content: start; padding: 0 20px;">
+        <% @items.each do |item| %>
+          <div style="padding: 10px; background-color: #ffffff; flex: 1; margin: 10px; width: calc(33.33% - 20px);">
+            <%= link_to item_path(item) do %>
+              <img style="width: 100%; height: auto; object-fit: contain; margin-bottom: 10px;" src="<%= url_for(item.item_image) %>">
+            <% end %>
+            <h5 style="margin: 0; padding: 0;"><%= item.name %></h5>
+            <p style="margin: 0; padding: 0;">¥<%= number_with_delimiter(item.price) %></p>
+          </div>
+        <% end %>
+      </div>
+      <p style="text-align: right;"><%= link_to 'すべての商品を見る＞', items_path %></p>
+    </div>
+  </div>
+</div>

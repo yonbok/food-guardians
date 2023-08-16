@@ -3,6 +3,10 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :reject_customer, only: [:create]
 
+  def after_sign_in_path_for(resource)
+    flash[:notice] = 'ログインに成功しました'
+    root_path
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

@@ -1,29 +1,37 @@
-<div class="relative mx-auto max-w-screen-xl p-6">
-  <div class="grid grid-cols-1 items-start gap-9 md:grid-cols-2">
-    <div>
-      <%= image_tag @item.image, class: "aspect-square w-full rounded-xl object-cover" %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="list-group" style="background-color: #F0FFF0; padding: 10px;">
+        <p>ジャンル一覧</p>
+        <%# @genres.each do |genre| %>
+          <%#= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action custom-list-item" %>
+        <%# end %>
+      </div>
     </div>
-    <div class="sticky top-0">
-      <div class="flex flex-col justify-between">
-        <div class="flex justify-between mb-6">
-          <div class="max-w-[35ch]">
-            <h1 class="text-2xl font-bold">
-              <%= @item.name %>
-            </h1>
-          </div>
-          <p class="text-2xl font-bold"><%= number_to_currency(@item.price, unit: "¥", strip_insignificant_zeros: true) %></p>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-6">
+          <img src="<%= url_for(@item.item_image) %>" width="300" height="250" />
         </div>
-        <div class="mb-3">
-          <p>
-            <%= @item.description %>
-          </p>
+        <div class="col-6">
+            <h1><%= @item.name %></h1><br>
+            <h3><%= @item.description %></h3><br><br>
+            <h2>￥<%= @item.price %>(税込)</h2><br><br>
+            <%= form_with model:@cart_item, url:cart_items_path, local:true do |f| %>
+            <%= f.hidden_field :item_id , :value => @item.id%>
+            <div class="row">
+              <div class="col-8">
+                <style>
+                  select{width:200px;height:40px;}
+                </style>
+                <%= f.select :quantity, [1,2,3,4,5,6,7,8,9,10], { prompt: '個数選択'} %>
+              </div>
+              <div class="col-4">
+                <%= f.submit "カートに入れる" ,class: 'btn btn-primary' %>
+              </div>
+            </div>
+            <% end %>
         </div>
-        <% if @item.stock > 0 %>
-          <%= form_with model: @cart_item, data: { turbo: false } do |f| %>
-            <%= f.hidden_field :product_id, :value => @item.id %>
-            <%= f.submit "Add to Cart", class:"w-full cursor-pointer focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" %>
-          <% end %>
-        <% end %>
       </div>
     </div>
   </div>

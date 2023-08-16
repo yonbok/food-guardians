@@ -1,5 +1,5 @@
 <h3 class="text-center">商品新規登録</h3>
-<%= form_with model: @item, url: new_item_path, local: true, class: 'col-6 mx-auto' do |f| %>
+<%= form_with model: @item, url: items_path, local: true, class: 'col-6 mx-auto' do |f| %>
   <div class="form-group row">
     <%= f.label :item_image, '商品画像', class: 'col-sm-3 col-form-label' %>
     <div class="col-sm-9">
@@ -27,6 +27,21 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group row">
+  <%= f.label :is_active, '販売ステータス', class: 'col-sm-3 col-form-label' %>
+    <div class="col-sm-9">
+      <div class="custom-control custom-radio custom-control-inline">
+        <%= f.radio_button :is_active, true, checked: @item.is_active, class: 'custom-control-input', id: 'is_active-true' %>
+        <%= f.label :is_active, '販売中', class: 'custom-control-label', for: 'is_active-true' %>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <%= f.radio_button :is_active, false, checked: !@item.is_active, class: 'custom-control-input', id: 'is_active-false' %>
+        <%= f.label :is_active, '販売停止中', class: 'custom-control-label', for: 'is_active-false' %>
+      </div>
+    </div>
+  </div>
+
 
   </div>
   <div class="form-group row">

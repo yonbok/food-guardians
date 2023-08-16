@@ -11,9 +11,9 @@ class Exective::ItemsController < ApplicationController
   end
 
   def create
-    @item = item.new(item_params)
+    @item = Item.new(item_params)
     if @item.save
-      redirect_to items_index_path(@item)
+      redirect_to items_path(@item)
     else
       render :new
     end
