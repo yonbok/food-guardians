@@ -6,9 +6,24 @@ class Public::CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
   end
 
-  def show
-    @item = Item.find(params[:id])
-    @cart_item = CartItem.new
+  def create
+    increase_or_create(params[:cart_item][:item_id])
+    redirect_to cart_items_path, notice: '商品がカートに追加されました'
+  end
+
+  def increase
+    @cart_item.increment!(:quantity, 1)
+    redirect_to request.referer, notice: 'カート内商品が更新されました'
+  end
+
+  def decrease
+    decrease_or_destroy(@cart_item)
+    redirect_to request.referer, notice: 'カート内商品が更新されました'
+  end
+
+  def destroy
+    @cart_item.destroy
+    redirect_to request.referer, notice: 'カート内商品が一個削除されました'
   end
 
 

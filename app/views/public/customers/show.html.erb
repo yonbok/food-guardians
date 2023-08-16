@@ -1,0 +1,49 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+      <h1 class="mb-4">マイページ</h1>
+
+      <h2>登録情報</h2>
+      <%= link_to '登録情報編集',  edit_customer_registration_path(@customer), class: "btn btn-success mb-4" %>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <th class="table-secondary w-25">氏名</th>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <th class="table-secondary">カナ</th>
+            <td> <%= @customer.kana_name %></td>
+          </tr>
+          <tr>
+            <th class="table-secondary">郵便番号</th>
+            <td><%= @customer.post_code.to_s.insert(3, "-") %></td>
+          </tr>
+          <tr>
+            <th class="table-secondary">住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <th class="table-secondary">電話番号</th>
+            <td><%= @customer.phone_number %></td>
+          </tr>
+          <tr>
+            <th class="table-secondary">メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+        </table>
+      </div>
+
+      <%#= link_to '配送先一覧表示', addresses_path, class: "btn btn-info mb-4" %>
+      <%#= link_to '注文履歴一覧表示', orders_path, class: "btn btn-info mb-4" %>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

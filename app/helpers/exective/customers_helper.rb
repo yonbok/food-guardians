@@ -1,2 +1,0 @@
-module Exective::CustomersHelper
-end

@@ -7,9 +7,7 @@ Rails.application.routes.draw do
   }
   scope module: :exective do
     get '/' => 'homes#top'
-    get  '/customers/check' => 'customers#check'
     post "items/new" => "items#new"
-    patch  '/customers/withdraw' => 'customers#withdraw'
     resources :items, except: [:destroy]
   end
 
@@ -35,8 +33,14 @@ Rails.application.routes.draw do
   scope module: :public do
     root :to =>"homes#top"
     get '/about' => 'homes#about'
-    get  '/customers/check' => 'customers#check'
-    patch  '/customers/withdraw' => 'customers#withdraw'
+    get "/customers/my_page" => "customers#show"
+    resources :customers, only: [:show, :edit, :update] do
+      collection do
+        get 'check_out'
+        get 'withdraw'
+        patch 'withdraw_update'
+      end
+    end
     resources :items, only: [:index, :show]
     resources :cart_items, only: %i[index create destroy] do
      member do
