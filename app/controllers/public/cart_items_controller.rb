@@ -33,12 +33,12 @@ class Public::CartItemsController < ApplicationController
     @cart_item = current_customer.cart_items.find(params[:id])
   end
 
-  def increase_or_create(product_id)
-    cart_item = current_customer.cart_items.find_by(item_id:)
+  def increase_or_create(item_id)
+    cart_item = current_customer.cart_items.find_by(item_id: params[:item_id])
     if cart_item
       cart_item.increment!(:quantity, 1)
     else
-      current_customer.cart_items.build(item_id:).save
+      current_customer.cart_items.build(item_id: params[:item_id]).save
     end
   end
 
@@ -48,5 +48,9 @@ class Public::CartItemsController < ApplicationController
     else
       cart_item.destroy
     end
+  end
+
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id, :quantity, :customer_id)
   end
 end
