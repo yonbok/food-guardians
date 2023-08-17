@@ -1,6 +1,6 @@
 <div class="container">
   <h2>経営者ログイン</h2><br>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "mb-5"}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "mb-5"}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-3 row">
         <label for="inputEmail" class="col-md-2 col-form-label">メールアドレス</label>

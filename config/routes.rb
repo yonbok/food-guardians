@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   registrations: "exective/registrations",
   sessions: 'exective/sessions'
   }
-  scope module: :exective do
-    get '/' => 'homes#top'
+  namespace :exective do
+    root to: 'homes#top'
     post "items/new" => "items#new"
     resources :items, except: [:destroy]
   end
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
 }
   namespace :admin do
-    get '/' => 'homes#top'
+    root to: 'homes#top'
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
-  scope module: :public do
+  scope path: 'customers', module: :public do
     root :to =>"homes#top"
     get '/about' => 'homes#about'
     resources :customers, only: [:show, :edit, :update] do

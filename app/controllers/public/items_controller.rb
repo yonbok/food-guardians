@@ -1,4 +1,7 @@
 class Public::ItemsController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :set_item, only: %i[show edit update]
+
   def index
     @items = Item.all
   end
@@ -10,6 +13,10 @@ class Public::ItemsController < ApplicationController
 
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:items).permit(:image,:name,:description,:price, :genre_id)

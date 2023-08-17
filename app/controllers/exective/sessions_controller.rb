@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Exective::SessionsController < Devise::SessionsController
-  before_action :reject_exective, only: [:create]
+  #before_action :reject_exective, only: [:create]
 
   def new
     @exective = Exective.new
