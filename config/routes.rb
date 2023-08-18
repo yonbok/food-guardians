@@ -41,11 +41,17 @@ Rails.application.routes.draw do
       end
     end
     resources :items, only: [:index, :show]
-    resources :cart_items, only: %i[index create destroy] do
-     member do
-       patch 'increase'
-       patch 'decrease'
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+     collection do
+        delete 'destroy_all'
      end
+     resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'confirm'
+        get 'complete'
+      end
+    end
+     resources :addresses, except: [:new, :show]
    end
   end
 
