@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="text-center">ご注文情報入力</h2>
+      <%= form_with model: @order, url: confirm_cart_item_orders_path, local: true do |f| %>
+      <!-- customer テーブルに登録されている住所の場合 -->
+        <%= f.radio_button :address_number, 1 %> <!-- address_number と定義して1～3の番号を confirm に送ります -->
+        <%= f.label :address_number_1, "ご自身の住所" %>
+        <%= current_customer.customer_address %>
+
+      <!-- 登録されたaddressから選んでもらう場合 -->
+        <%= f.radio_button :address_number, 2 %>
+        <%= f.label :address_number_2, "ご登録先の住所" %>
+        <%= f.collection_select(:registered, current_customer.addresses.all, :id, :address %>
+      <!-- registered として current_customer.address.all で取得した id を送る。
+           ユーザーに表示して選択してもらうのは address  -->
+
+      <!-- 新しい住所を追加する場合です -->
+        <%= f.radio_button :address_number, 3 %>
+        <%= f.label :address_number_3, "新しいお届け先" %>
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address %>
+        <%= f.label :address_name, "宛名" %>
+        <%= f.text_field :address_name %>
+        <%= f.submit "確認画面へ進む" %>
+      <% end %>
+    </div>
+  </div>
+</div>

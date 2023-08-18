@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="text-center">ご注文情報確認</h2>
+      <% @cart_items.each do |cart| %>
+        <%= cart.item.name %>
+        <%= (cart.item.price).to_s(:delimited) %>
+        <%= cart.quantity %>
+        <%= (cart.item.price*cart.quantity).to_s(:delimited) %>
+      <% end %>
+      <p>ご請求金額</p>
+      <%= @total.to_s(:delimited) %>
+      <p>お届け先</p>
+      <%= @order.address %>
+
+      <!-- 消費者には注文確定ボタンだけ表示 -->
+      <%= form_with model: @order, url: cart_item_orders_path, local: true do |f| %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :postcode %>
+        <%= f.hidden_field :payment, value: @total %>
+        <%= f.hidden_field :shipping_fee %>
+        <%= f.submit "注文を確定する" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,6 @@ class Public::OrdersController < ApplicationController
       cart_items = current_customer.cart_items.all
       # ログインユーザーのカートアイテムをすべて取り出して cart_items に入れる
       @order = current_customer.orders.new(order_params)
-      # 渡ってきた値を @order に入れます
       if @order.save
         cart_items.each do |cart|
       # order_detail にも一緒にデータを保存する必要があるのでここで保存
@@ -21,7 +20,7 @@ class Public::OrdersController < ApplicationController
       # カート情報を削除するので item との紐付けが切れる前に保存
           order_item.save
         end
-        redirect_to 遷移したいページのパス
+        redirect_to complete_cart_item_orders_path
         cart_items.destroy_all
       # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
       else
@@ -32,38 +31,41 @@ class Public::OrdersController < ApplicationController
 
 
     # new 画面から渡ってきたデータをユーザーに確認してもらう
-    def check
+    def comfirm
       @order = Order.new(order_params)
-      # new 画面から渡ってきたデータを @order に入れる
       if params[:order][:address_number] == "1"
       # view で定義している address_number が"1"だったときにこの処理を実行
       # form_with で @order で送っているので、order に紐付いた address_number となる
-        @order.name = current_customer.name # @order の各カラムに必要なものを入れる
+        @order.name = current_customer.name
         @order.address = current_customer.customer_address
+        @order.postcode = current_customer.customer_postcode
+        @order.customer_id = current_customer.customer_id
       elsif params[:order][:address_number] == "2"
-    # view で定義している address_number が"2"だったときにこの処理を実行します
+      # view で定義している address_number が"2"だったときにこの処理を実行
         if Address.exists?(name: params[:order][:registered])
-    # registered は viwe で定義しています
+      # registered は viwe で定義している
           @order.name = Address.find(params[:order][:registered]).name
           @order.address = Address.find(params[:order][:registered]).address
+          @order.postcode = Address.find(params[:order][:registered]).postcode
+          @order.customer_id = Address.find(params[:order][:registered]).customer_id
         else
           render :new
-    # 既存のデータを使っていますのでありえないですが、万が一データが足りない場合は new を render します
+      # 既存のデータを使っているためあり得ないとは思うが、万が一データが足りない場合は new を renderする
         end
       elsif params[:order][:address_number] == "3"
-    # view で定義している address_number が"3"だったときにこの処理を実行します
+      # view で定義している address_number が"3"だったときにこの処理を実行
         address_new = current_customer.addresses.new(address_params)
-        if address_new.save # 確定前(確認画面)で save してしまうことになりますが、私の知識の限界でした
+        if address_new.save
         else
           render :new
-    # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻します
+      # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻す
         end
       else
-        redirect_to 遷移したいページ # ありえないですが、万が一当てはまらないデータが渡ってきた場合の処理です
+        redirect_to  cart_item_addresses_path # 万が一当てはまらないデータが渡ってきた場合の処理
       end
-      @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用します
-      @total = @cart_items.inject(0) { |sum, item| sum + item.sum_price }
-    # 合計金額を出す処理です sum_price はモデルで定義したメソッドです
+      @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用
+      @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
+      # 合計金額を出す処理 subtotal はモデルで定義したメソッド
     end
 
     private
@@ -73,6 +75,6 @@ class Public::OrdersController < ApplicationController
     end
 
     def address_params
-      params.require(:address).permit(:name, :address, :customer_id, :postcode)
+      params.require(:order).permit(:name, :address, :customer_id, :postcode)
     end
-  end
+end
