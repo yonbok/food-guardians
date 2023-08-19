@@ -1,0 +1,23 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center"><%= @exective.name %>さんの会員詳細</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="pl-5">
+          <p class="my-3"><strong>会員ID </strong><span style="margin-left:150px;"><%= @exective.id %></span></p>
+          <p class="my-3"><strong>氏名 </strong><span style="margin-left:160px;"><%= @exective.name %> </span></p>
+          <p class="my-3"><strong>フリガナ </strong><span style="margin-left:130px;"><%= @exective.kana_name %> </span></p>
+          <p class="my-3"><strong>郵便番号 </strong><span style="margin-left:130px;"><%= @exective.post_code %></span></p>
+          <p class="my-3"><strong>住所 </strong><span style="margin-left:160px;"><%= @exective.address %></span></p>
+          <p class="my-3"><strong>電話番号 </strong><span style="margin-left:125px;"><%= @exective.phone_number %></span></p>
+          <p class="my-3"><strong>メールアドレス </strong><span style="margin-left:80px;"><%= @exective.email %></span></p>
+          <p class="my-3"><strong>会員ステータス </strong><span style="margin-left:90px; color:<%= @exective.is_deleted ? 'gray' : 'green' %>;"><%= @customer.is_deleted ? '退会済み' : '有効' %></span></p>
+
+          <%= link_to 'ステータスを編集する', edit_admin_customer_path(@customer), class: 'btn btn-success btn-space' %>
+          <%= link_to '注文履歴一覧へ', admin_path, class: 'btn btn-info' %>
+        </div>
+      </div>
+    </div>
+</div>

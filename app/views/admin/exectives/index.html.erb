@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <h2>会員一覧（経営者）</h2>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>氏名</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+        <% @exectives.each do |exective| %>
+          <tr>
+            <td><%= exective.id %></td>
+            <td>
+             <%= link_to "#{exective.name}", admin_customer_path(customer) %>
+            </td>
+            <td><%= exective.email %></td>
+          <td class="<%= exective.is_deleted ? 'text-gray' : 'text-green' %>"><%= exective.is_deleted ? '退会済み' : '有効' %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%#= paginate @exectives %>
+    </div>
+  </div>

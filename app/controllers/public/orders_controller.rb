@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
       cart_items = current_customer.cart_items.all
       # ログインユーザーのカートアイテムをすべて取り出して cart_items に入れる
       @order = current_customer.orders.new(order_params)
+      @order.order_status = 0
       if @order.save
         cart_items.each do |cart|
       # order_detail にも一緒にデータを保存する必要があるのでここで保存
@@ -15,11 +16,13 @@ class Public::OrdersController < ApplicationController
           order_detail.item_id = cart.item_id
           order_detail.order_id = @order.id
           order_detail.order_quantity = cart.quantity
+          order_detail.buy_price = cart.subtotal
       # 購入が完了したらカート情報は削除するのでここに保存
           order_item.order_price = cart.item.price
       # カート情報を削除するので item との紐付けが切れる前に保存
           order_item.save
         end
+        flash[:notice] = "ご注文が確定しました。"
         redirect_to complete_cart_item_orders_path
         cart_items.destroy_all
       # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
@@ -68,10 +71,26 @@ class Public::OrdersController < ApplicationController
       @shiptotal = 0
     end
 
+    def complete
+    end
+
+     def index
+       @orders = current_customer.orders
+     end
+
+    def show
+      @order = Order.find(params[:id])
+      @order_details = OrderDetail.where(order_id: params[:id])
+    end
+
     private
 
     def order_params
       params.require(:order).permit(:name, :address, :customer_id, :payment, :postcode, :order_status, :shipping_fee)
+    end
+
+    def order_detail_params
+      params.require(:order_detail).permit(:order_id, :item_id, :quantity, :buy_price, :production_status)
     end
 
     def address_params
