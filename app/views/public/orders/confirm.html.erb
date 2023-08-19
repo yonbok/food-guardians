@@ -2,26 +2,67 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
       <h2 class="text-center">ご注文情報確認</h2>
-      <% @cart_items.each do |cart| %>
-        <%= cart.item.name %>
-        <%= (cart.item.price).to_s(:delimited) %>
-        <%= cart.quantity %>
-        <%= (cart.item.price*cart.quantity).to_s(:delimited) %>
-      <% end %>
-      <p>ご請求金額</p>
-      <%= @total.to_s(:delimited) %>
-      <p>お届け先</p>
-      <%= @order.address %>
+      <table class="table table-bordered ">
+        <thead>
+         <tr>
+          <td>商品名</td>
+          <td>単価（税込）</td>
+          <td>数量</td>
+          <td>小計</td>
+         </tr>
+        </thead>
+        <% @cart_items.each do |cart_item| %>
+        <tbody>
+         <td>
+          <img src="<%= url_for(cart_item.item.item_image) %>" width="70" height="60" />
+          <%= cart_item.item.name %>
+         </td>
+         <td>￥<%= (cart_item.item.price).to_s(:delimited) %></td>
+         <td><%= cart_item.quantity %></td>
+         <td>￥<%= (cart_item.item.price*cart_item.quantity).to_s(:delimited) %></td>
+        </tbody>
+        <% @total += cart_item.subtotal %>
+        <% end %>
+       </table>
+      </div>
+      <div class="col-md-3">
+       <table class="table table-bordered ">
+        <tr>
+         <td>送料</td>
+         <% @order.shipping_fee = 800 %>
+         <td>￥<%= @order.shipping_fee.to_i %></td>
+        </tr>
+        <tr>
+         <td>税込み商品価格</td>
+         <td>￥<%= @total %></td>
+        </tr>
+        <tr>
+         <td>請求金額</td>
+         <% @shiptotal = @total + @order.shipping_fee %>
+         <td>￥<%= @shiptotal.to_i %></td>
+        </tr>
+       </table>
 
-      <!-- 消費者には注文確定ボタンだけ表示 -->
-      <%= form_with model: @order, url: cart_item_orders_path, local: true do |f| %>
-        <%= f.hidden_field :name %>
-        <%= f.hidden_field :address %>
-        <%= f.hidden_field :postcode %>
-        <%= f.hidden_field :payment, value: @total %>
-        <%= f.hidden_field :shipping_fee %>
-        <%= f.submit "注文を確定する" %>
-      <% end %>
+       <div class="row">
+        <h3><strong>支払方法</strong></h3>&emsp;
+         <h4><%= t("enums.order.payment.#{@order.payment}") %></h4><br>
+       </div>
+       <br>
+       <div class="row">
+        <h3><strong>お届け先</strong></h3>&emsp;
+         <h4>〒<%= @order.postcode %>&nbsp;<%= @order.address %>&nbsp;<%= @order.name %></h4><br>
+       </div>
+       <br>
+       <div align="center">
+        <%= form_with model: @order, url: cart_item_orders_path, method: :post, local: true do |f| %>
+         <%= f.hidden_field :customer_id %>
+         <%= f.hidden_field :postcode %>
+         <%= f.hidden_field :payment %>
+         <%= f.hidden_field :name %>
+         <%= f.hidden_field :address %>
+         <%= f.hidden_field :shipping_fee %>
+         <%= f.submit "ご注文を確定する", class: "btn btn-success" %>
+        <% end %>
     </div>
   </div>
 </div>

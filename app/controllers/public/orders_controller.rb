@@ -31,15 +31,15 @@ class Public::OrdersController < ApplicationController
 
 
     # new 画面から渡ってきたデータをユーザーに確認してもらう
-    def comfirm
+    def confirm
       @order = Order.new(order_params)
       if params[:order][:address_number] == "1"
       # view で定義している address_number が"1"だったときにこの処理を実行
       # form_with で @order で送っているので、order に紐付いた address_number となる
         @order.name = current_customer.name
-        @order.address = current_customer.customer_address
-        @order.postcode = current_customer.customer_postcode
-        @order.customer_id = current_customer.customer_id
+        @order.address = current_customer.address
+        @order.postcode = current_customer.post_code
+        @order.customer_id = current_customer.id
       elsif params[:order][:address_number] == "2"
       # view で定義している address_number が"2"だったときにこの処理を実行
         if Address.exists?(name: params[:order][:registered])
@@ -64,8 +64,8 @@ class Public::OrdersController < ApplicationController
         redirect_to  cart_item_addresses_path # 万が一当てはまらないデータが渡ってきた場合の処理
       end
       @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用
-      @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
-      # 合計金額を出す処理 subtotal はモデルで定義したメソッド
+      @total = 0
+      @shiptotal = 0
     end
 
     private
