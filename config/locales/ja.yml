@@ -1,4 +1,3 @@
----
 ja:
   activerecord:
     errors:
@@ -182,7 +181,7 @@ ja:
       short: "%m/%d %H:%M"
     pm: 午後
 
-    enums:
+ enums:
     order:
       payment:
         credit_card: "クレジットカード"
