@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  root 'homes#top'
   # 経営者用
   # URL /exective/sign_in ...
   devise_for :exectives, skip: [:passwords], controllers: {
@@ -6,7 +8,6 @@ Rails.application.routes.draw do
   sessions: 'exective/sessions'
   }
   namespace :exective do
-    root to: 'homes#top'
     post "items/new" => "items#new"
     resources :items, except: [:destroy]
   end
@@ -31,8 +32,7 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
 }
   scope path: 'customers', module: :public do
-    root :to =>"homes#top"
-    get '/about' => 'homes#about'
+    #root to: 'homes#top'
     resources :customers, only: [:show, :edit, :update] do
       collection do
         get 'check_out'

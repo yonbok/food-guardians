@@ -33,7 +33,7 @@ class Exective::SessionsController < Devise::SessionsController
   def guest_sign_in
     exective = Exective.guest
     sign_in exective
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to exective_items_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
 

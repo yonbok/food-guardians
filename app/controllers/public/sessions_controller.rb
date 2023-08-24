@@ -5,7 +5,7 @@ class Public::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'ログインに成功しました'
-    root_path
+    customer_path(resource)
   end
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -33,7 +33,7 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to items_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
 
