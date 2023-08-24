@@ -5,7 +5,7 @@
   <div class="row">
     <h2>商品一覧</h2>
     <div class="ml-auto">
-      <%= link_to '商品新規登録', new_item_path, class: 'btn', style: 'background-color: #E4FF8D;' %>
+      <%= link_to '商品新規登録', new_exective_item_path, class: 'btn', style: 'background-color: #E4FF8D;' %>
     </div>
     <table class="table">
         <thead>
@@ -21,7 +21,7 @@
           <% @items.each do |item| %>
            <tr>
             <td><%= item.id %></td>
-            <td><%= link_to item.name, item_path(item) %></td>
+            <td><%= link_to item.name, exective_item_path(item) %></td>
             <td><%= item.price.to_s(:delimited) %></td>
             <td style="margin-left:90px; color:green;">
             <%= item.is_active ? '販売中' : '販売停止中' %></td>

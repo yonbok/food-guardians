@@ -1,19 +1,32 @@
-<div class="col-9">
-    <h2>商品一覧（全<%= @items.count %>件）</h2>
-    <div class="row">
-      <% @items.each do |item| %>
-        <div class="col-sm-4 mb-4">
-          <div class="card h-100">
-            <%= link_to customer_path(item.id) do %>
-              <%= image_tag url_for(item.image), class: "card-img-top", style: "object-fit: contain; height: 200px;" %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="list-group" style="background-color: #F0FFF0; padding: 10px;">
+        <p>ジャンル一覧</p>
+        <%# @genres.each do |genre| %>
+          <%#= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action custom-list-item" %>
+        <%# end %>
+      </div>
+     </div>
+
+      <div class="col-8">
+          <h2>商品一覧（全<%= @items.count %>件）</h2>
+          <div class="row">
+            <% @items.each do |item| %>
+              <div class="col-sm-4 mb-4">
+                <div class="card h-100">
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag url_for(item.item_image), class: "card-img-top", style: "object-fit: contain; height: 200px;" %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text">¥<%= number_with_delimiter(item.price) %></p>
+                  </div>
+                </div>
+              </div>
             <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= item.name %></h5>
-              <p class="card-text">¥<%= number_with_delimiter(item.price) %></p>
-            </div>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-</div>
+

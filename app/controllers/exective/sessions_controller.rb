@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Exective::SessionsController < Devise::SessionsController
-  #before_action :reject_exective, only: [:create]
+  before_action :reject_exective, only: [:create]
 
-  def new
-    @exective = Exective.new
+  def after_sign_in_path_for(resource)
+    flash[:notice] = 'ログインに成功しました'
+    exective_items_path(resource)
   end
   # before_action :configure_sign_in_params, only: [:create]
 

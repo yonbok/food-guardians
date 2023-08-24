@@ -5,7 +5,7 @@ class Public::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'ログインに成功しました'
-    customer_path(resource)
+    items_path(resource)
   end
   # before_action :configure_sign_in_params, only: [:create]
 

@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
     def new
       @order = Order.new
       @orders = current_customer.orders
@@ -55,7 +56,7 @@ class Public::OrdersController < ApplicationController
           @order.postcode = Address.find(params[:order][:registered]).postcode
           @order.customer_id = Address.find(params[:order][:registered]).customer_id
         else
-          render :new
+          #render :new
       # 既存のデータを使っているためあり得ないとは思うが、万が一データが足りない場合は new を renderする
         end
       elsif params[:order][:address_number] == "3"
@@ -93,7 +94,7 @@ class Public::OrdersController < ApplicationController
     end
 
     def order_detail_params
-      params.require(:order_detail).permit(:order_id, :item_id, :quantity, :buy_price, :production_status)
+      params.require(:order_detail).permit(:order_id, :cart_item_id, :quantity, :buy_price, :production_status)
     end
 
     def address_params
