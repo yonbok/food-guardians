@@ -1,0 +1,52 @@
+<div class="container mt-1">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>配送先登録/一覧</h2>
+      <div class="table-responsive">
+       <table class="table table-bordered">
+        <%= form_with model: @address, url: cart_item_addresses_path, method: :get,local: true do |f| %>
+          <div class="form-group">
+            <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
+            <%= f.text_field :postcode %>
+          </div>
+          <div class="form-group">
+            <%= f.label :address, "住所" %>
+            <%= f.text_field :address %>
+          </div>
+          <div class="form-group">
+            <%= f.label :name, "宛名" %>
+            <%= f.text_field :name %>
+          </div>
+          <%= f.submit "新規登録", class:"btn btn-primary" %>
+        <% end %>
+       </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>郵便番号</th>
+            <th>住所</th>
+            <th>宛名</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.postcode.to_s.insert(3, "-") %></td>
+            <td><%= address.address %></td>
+            <td><%= address.name %></td>
+            <td>
+              <%= link_to "編集する", edit_cart_item_address_path(address), class: "btn btn-success" %>
+              <%= link_to "削除する", cart_item_address_path(address), method: :delete, class: "btn btn-danger" %>
+            </td>
+          </tr>
+          <% end %>
+      </tbody>
+     </div>
+    </div>
+   </div>
+ </table>
+</div>

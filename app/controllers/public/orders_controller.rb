@@ -1,6 +1,9 @@
 class Public::OrdersController < ApplicationController
     def new
       @order = Order.new
+      @orders = current_customer.orders
+      @addresses = current_customer.addresses.all
+      @cart_items = CartItem.all
     end
 
     # 購入を確定
@@ -15,12 +18,12 @@ class Public::OrdersController < ApplicationController
           order_detail = OrderDetail.new
           order_detail.item_id = cart.item_id
           order_detail.order_id = @order.id
-          order_detail.order_quantity = cart.quantity
+          order_detail.quantity = cart.quantity
           order_detail.buy_price = cart.subtotal
       # 購入が完了したらカート情報は削除するのでここに保存
-          order_item.order_price = cart.item.price
+          #order_detail.buy_price = cart.item.buy_price
       # カート情報を削除するので item との紐付けが切れる前に保存
-          order_item.save
+          order_detail.save
         end
         flash[:notice] = "ご注文が確定しました。"
         redirect_to complete_cart_item_orders_path
