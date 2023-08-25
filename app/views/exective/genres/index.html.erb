@@ -1,0 +1,41 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<h1 class="text-center">ジャンル一覧・追加</h1>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <%= form_with(model: @genre, url: exective_genres_path, class: 'form-group') do |f| %>
+      <%= f.label :name, "ジャンル名", class: 'form-label' %>
+      <div class="input-group mb-3">
+        <%= f.text_field :name, class: 'form-control', placeholder: 'ジャンル名を入力してください' %>
+        <div class="input-group-append">
+          <%= f.submit "新規登録", class: 'btn btn-success' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ジャンル名</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @genres.each do |genre| %>
+          <tr>
+            <td><%= genre.name %></td>
+            <td><%= link_to '編集', edit_exective_genre_path(genre), class: 'btn btn-success' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

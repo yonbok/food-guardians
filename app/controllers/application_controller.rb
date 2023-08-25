@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     when Customer
       items_path(resource)
     when Admin
-      admin_path
+      admin_root_path(resource)
     when Exective
       exective_items_path(resource)
     end

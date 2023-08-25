@@ -1,0 +1,15 @@
+<h1 class="text-center">ジャンル編集</h1>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <%= form_with(model: @genre, url: edit_exective_genre_path(@genre), method: :patch, class: 'form-group') do |f| %>
+      <%= f.label :name, "ジャンル名", class: 'form-label' %>
+      <div class="input-group mb-3">
+        <%= f.text_field :name, class: 'form-control', placeholder: 'ジャンル名を入力してください' %>
+        <div class="input-group-append">
+          <%= f.submit "更新", class: 'btn btn-success' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

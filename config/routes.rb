@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   namespace :exective do
     post "items/new" => "items#new"
     resources :items, except: [:destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :exectives, only: [:show, :edit, :update] do
+      collection do
+        get 'check_out'
+        get 'withdraw'
+        patch 'withdraw_update'
+      end
+    end
   end
 
 
@@ -20,9 +28,9 @@ Rails.application.routes.draw do
 }
   namespace :admin do
     root to: 'homes#top'
-    resources :items, except: [:destroy]
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :exectives, only: [:index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
+    resources :items, only: [:show]
   end
 
   # 消費者用

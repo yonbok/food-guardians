@@ -7,8 +7,8 @@
       <div class="col-md-6">
         <div class="pl-5">
           <p class="my-3"><strong>会員ID </strong><span style="margin-left:150px;"><%= @customer.id %></span></p>
-          <p class="my-3"><strong>氏名 </strong><span style="margin-left:160px;"><%= @customer.last_name %> <%= @customer.first_name %></span></p>
-          <p class="my-3"><strong>フリガナ </strong><span style="margin-left:130px;"><%= @customer.kana_last_name %> <%= @customer.kana_first_name %></span></p>
+          <p class="my-3"><strong>氏名 </strong><span style="margin-left:160px;"><%= @customer.name %> </span></p>
+          <p class="my-3"><strong>フリガナ </strong><span style="margin-left:130px;"><%= @customer.kana_name %> </span></p>
           <p class="my-3"><strong>郵便番号 </strong><span style="margin-left:130px;"><%= @customer.post_code %></span></p>
           <p class="my-3"><strong>住所 </strong><span style="margin-left:160px;"><%= @customer.address %></span></p>
           <p class="my-3"><strong>電話番号 </strong><span style="margin-left:125px;"><%= @customer.phone_number %></span></p>
@@ -16,7 +16,6 @@
           <p class="my-3"><strong>会員ステータス </strong><span style="margin-left:90px; color:<%= @customer.is_deleted ? 'gray' : 'green' %>;"><%= @customer.is_deleted ? '退会済み' : '有効' %></span></p>
 
           <%= link_to 'ステータスを編集する', edit_admin_customer_path(@customer), class: 'btn btn-success btn-space' %>
-          <%= link_to '注文履歴一覧へ', admin_path, class: 'btn btn-info' %>
         </div>
       </div>
     </div>

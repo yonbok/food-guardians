@@ -1,7 +1,7 @@
 class Admin::ItemsController < ApplicationController
 
-  def index
-    @items = Item.all
+  def show
+    @item = Item.find(params[:id])
   end
 
 end

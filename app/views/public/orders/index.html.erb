@@ -15,12 +15,12 @@
           <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
           <td>〒<%= order.postcode %>&nbsp;<%= order.address %><br><%= order.name %></td>
           <td>
-            <% order.order_datails.each do |order_datail| %>
-              <%= order_datail.item.name %><br>
+            <% order.order_details.each do |order_detail| %>
+              <%= order_details.item.name %><br>
             <% end %>
           </td>
           <td>
-            <% order.order_datails.each do |order_datail| %>
+            <% order.order_details.each do |order_detail| %>
               <%= order.total_price.to_i %><br>
             <% end %>
           </td>
@@ -28,7 +28,7 @@
           <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
           </td>
           <td>
-          <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
+          <%= link_to "表示する", cart_item_order_path(order), class: "btn btn-primary" %>
           </td>
         </tr>
       <% end %>

@@ -1,18 +1,18 @@
 <div class="container mt-5">
-  <h2 class="mb-4"><%= @customer.name %>さんの会員ステータス編集</h2>
+  <h2 class="mb-4"><%= @exective.name %>さんの会員ステータス編集</h2>
 
-  <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
-    <% render "public/shared/error_messages", resource: @customer %>
+  <%= form_with model: @exective, url: edit_admin_exective_path(@exective), method: :patch, local: true do |f| %>
+    <% render "exective/shared/error_messages", resource: @exective %>
 
     <div class="form-group row">
       <%= f.label :is_deleted, '会員ステータス', class: 'col-sm-3 col-form-label' %>
       <div class="col-sm-9">
         <div class="custom-control custom-radio custom-control-inline">
-          <%= f.radio_button :is_deleted, false, checked: @customer.is_deleted == false, class: 'custom-control-input', id: 'status-active' %>
+          <%= f.radio_button :is_deleted, false, checked: @exective.is_deleted == false, class: 'custom-control-input', id: 'status-active' %>
           <%= f.label :is_deleted, '有効', class: 'custom-control-label', for: 'status-active' %>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-          <%= f.radio_button :is_deleted, true, checked: @customer.is_deleted == true, class: 'custom-control-input', id: 'status-deleted' %>
+          <%= f.radio_button :is_deleted, true, checked: @exective.is_deleted == true, class: 'custom-control-input', id: 'status-deleted' %>
           <%= f.label :is_deleted, '退会', class: 'custom-control-label', for: 'status-deleted' %>
         </div>
       </div>
