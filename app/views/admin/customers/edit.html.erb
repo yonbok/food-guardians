@@ -1,12 +1,11 @@
 <div class="container mt-5">
-  <h2 class="mb-4"><%= @customer.name %>さんの会員ステータス編集</h2>
+  <h2 class="text-center"><%= @customer.name %>さんの会員ステータス編集</h2>
 
   <%= form_with model: @customer, url: edit_admin_customer_path(@customer), method: :patch, local: true do |f| %>
     <% render "public/shared/error_messages", resource: @customer %>
 
-    <div class="form-group row">
-      <%= f.label :is_deleted, '会員ステータス', class: 'col-sm-3 col-form-label' %>
-      <div class="col-sm-9">
+      <h5 class="text-center"><%= f.label :is_deleted, '会員ステータス', class: 'col-sm-3 col-form-label' %></h5>
+      <div class="col-md-9">
         <div class="custom-control custom-radio custom-control-inline">
           <%= f.radio_button :is_deleted, false, checked: @customer.is_deleted == false, class: 'custom-control-input', id: 'status-active' %>
           <%= f.label :is_deleted, '有効', class: 'custom-control-label', for: 'status-active' %>
