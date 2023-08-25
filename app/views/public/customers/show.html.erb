@@ -6,9 +6,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
 
-      <h1 class="mb-4">マイページ</h1>
-
-      <h2>登録情報</h2>
+      <h2 class="text-center mb-4">登録情報</h2>
       <%= link_to '登録情報編集',  edit_customer_registration_path(@customer), class: "btn btn-success mb-4" %>
 
       <div class="table-responsive">
@@ -40,8 +38,8 @@
         </table>
       </div>
 
-      <%= link_to '配送先一覧表示', cart_item_addresses_path, class: "btn btn-info mb-4" %>
-      <%= link_to '注文履歴一覧表示', cart_item_orders_path, class: "btn btn-info mb-4" %>
+      <%#= link_to '配送先一覧表示', cart_item_addresses_path(@address), class: "btn btn-info mb-4" %>
+      <%= link_to '注文履歴一覧表示', cart_item_orders_path(@orders), class: "btn btn-info mb-4" %>
 
     </div>
     <div class="col-md-2"></div>

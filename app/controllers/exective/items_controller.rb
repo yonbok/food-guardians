@@ -3,7 +3,8 @@ class Exective::ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update]
 
   def index
-    @items = Item.all
+    @items = Item.page(params[:page])
+    @genres = Genre.all
   end
 
   def new
@@ -41,6 +42,6 @@ class Exective::ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :price, :item_image)
+    params.require(:item).permit(:name, :description, :price, :item_image, :genre_id, :is_active)
   end
 end
