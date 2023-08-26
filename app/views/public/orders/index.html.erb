@@ -25,7 +25,8 @@
             <% end %>
           </td>
           <td>
-          <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
+          <%#= I18n.t("enums.order.order_status.#{order.order_status}") %>
+          <%= order.payment_method_i18n %>
           </td>
           <td>
           <%= link_to "表示する", cart_item_order_path(order), class: "btn btn-primary" %>
