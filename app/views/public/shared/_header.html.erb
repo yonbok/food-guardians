@@ -8,6 +8,11 @@
             <% if admin_signed_in? %>
                 <li class="nav-item">
                   <div type="button" class="btn btn-outline-primary btn-custom">
+                    <%= link_to "商品一覧", admin_root_path %>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <div type="button" class="btn btn-outline-primary btn-custom">
                     <%= link_to "経営者会員一覧", admin_exectives_path %>
                   </div>
                 </li>
@@ -21,8 +26,6 @@
                     <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
                   </div>
                 </li>
-              <%# else %>
-              <%# end %>
             <% elsif customer_signed_in? %>
                 <li style="width:300px; margin:0 auto;">
                   ようこそ、<%= current_customer.name %>さん！

@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
 }
   scope path: 'customers', module: :public do
-    #root to: 'homes#top'
     resources :customers, only: [:show, :edit, :update] do
       collection do
         get 'check_out'

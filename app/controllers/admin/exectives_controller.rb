@@ -1,7 +1,7 @@
 class Admin::ExectivesController < ApplicationController
   before_action :authenticate_admin!
   def index
-    @exectives = Exective.all#.page(params[:page]).per(10)
+    @exectives = Exective.page(params[:page])
   end
 
   def show

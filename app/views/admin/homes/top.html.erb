@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
-      <div class="list-group" style="background-color: #F0FFF0; padding: 10px;">
+      <div class="list-group" style="background-color: #f7b977; padding: 10px;">
         <p>ジャンル一覧</p>
-        <%# @genres.each do |genre| %>
-          <%#= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action custom-list-item" %>
-        <%# end %>
+        <% @genres.each do |genre| %>
+          <%= link_to genre.name, admin_root_path(genre_id: genre.id), class: "list-group-item list-group-item-action custom-list-item" %>
+        <% end %>
       </div>
      </div>
 
@@ -15,7 +15,7 @@
             <% @items.each do |item| %>
               <div class="col-sm-4 mb-4">
                 <div class="card h-100">
-                  <%= link_to item_path(item.id) do %>
+                  <%= link_to admin_item_path(item.id) do %>
                     <%= image_tag url_for(item.item_image), class: "card-img-top", style: "object-fit: contain; height: 200px;" %>
                   <% end %>
                   <div class="card-body">

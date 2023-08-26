@@ -2,7 +2,7 @@
   <h2 class="mb-4"><%= @exective.name %>さんの会員ステータス編集</h2>
 
   <%= form_with model: @exective, url: edit_admin_exective_path(@exective), method: :patch, local: true do |f| %>
-    <% render "exective/shared/error_messages", resource: @exective %>
+    <% render "admin/shared/error_messages", resource: @exective %>
 
     <div class="form-group row">
       <%= f.label :is_deleted, '会員ステータス', class: 'col-sm-3 col-form-label' %>

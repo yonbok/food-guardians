@@ -10,17 +10,27 @@
   </div>
   <div class="row justify-content-center">
     <h5 class="text-center">
-      <%= link_to "経営者様登録はこちら", new_exective_registration_path, class: "elink" %>
+      <%= link_to "経営者様登録はこちら", new_exective_registration_path, class: 'btn', style: 'background-color: #f2a0a1;' %>
     </h5>
   </div>
   <div class="row justify-content-center">
     <h5 class="text-center">
-      <%= link_to "消費者様登録はこちら", new_customer_registration_path, class: "clink" %>
+      <%= link_to "消費者様登録はこちら", new_customer_registration_path, class: 'btn', style: 'background-color: #fcd575;' %>
     </h5>
   </div>
   <div class="row justify-content-center">
     <h5 class="text-center">
-      <%= link_to "管理者様ログインはこちら", new_admin_session_path, class: "alink" %>
+      <%= link_to "管理者様ログインはこちら", new_admin_session_path, class: 'btn', style: 'background-color: #e49e61;' %>
+    </h5>
+  </div>
+  <div class="row justify-content-center">
+    <h5 class="text-center">
+      <%= link_to "経営者ゲストログインはこちら", exectives_guest_sign_in_path, class: 'elink' %>
+    </h5>
+  </div>
+  <div class="row justify-content-center">
+    <h5 class="text-center">
+      <%= link_to "消費者ゲストログインはこちら", customers_guest_sign_in_path, class: 'clink' %>
     </h5>
   </div>
 </div>

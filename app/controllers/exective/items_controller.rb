@@ -13,8 +13,9 @@ class Exective::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.genre_id = 1 #仮実装
     if @item.save
-      redirect_to items_path(@item)
+      redirect_to exective_item_path(@item)
     else
       render :new
     end

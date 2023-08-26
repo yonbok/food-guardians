@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
-      <div class="list-group" style="background-color: #ffbf7f; padding: 10px;">
+      <div class="list-group" style="background-color: #f7b977; padding: 10px;">
         <p>ジャンル一覧</p>
         <% @genres.each do |genre| %>
           <%= link_to genre.name, exective_genres_path(genre_id: genre.id), class: "list-group-item list-group-item-action custom-list-item" %>
