@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <h2 class="mb-4">会員情報編集</h2>
+
+  <%= form_with model: @exective, url: edit_exective_exective_path(@exective), method: :get, local: true do |f| %>
+    <% render "exective/shared/error_messages", resource: @exective %>
+
+     <div class="row">
+          <label class="col-lg-3">店舗名</label>
+          <div class="col-lg-3">
+            <%= f.text_field :last_name,autoforcus: true, autocomplete: "name",  placeholder: "おいしい店" %>
+          </div>
+        </div><br>
+
+      <div class="row">
+        <label class="col-lg-3">店舗名（カタカナ）</label>
+        <div class="col-lg-3">
+          <%= f.text_field :kana_name,autoforcus: true, autocomplete: "kana_last_name",  placeholder: "オイシイミセ" %>
+        </div>
+      </div><br>
+
+       <div class="row">
+        <label class="col-lg-3">郵便番号（ハイフンなし）</label>
+        <div class="col-lg-3">
+          <%= f.text_field :post_code,autoforcus: true, autocomplete: "post_code",  placeholder: "0000000" %>
+        </div>
+      </div><br>
+
+      <div class="row">
+        <label class="col-lg-3">店舗住所</label>
+        <div class="col-lg-3">
+          <%= f.text_field :address,autoforcus: true, autocomplete: "address",  placeholder: "東京都渋谷区代々木神園町0-0" %>
+        </div>
+      </div><br>
+
+      <div class="row">
+        <label class="col-lg-3">電話番号（ハイフンなし）</label>
+        <div class="col-lg-3">
+          <%= f.text_field :phone_number,autoforcus: true, autocomplete: "phone_number",  placeholder: "0000000000" %>
+        </div>
+      </div><br>
+
+     <div class="row">
+        <label class="col-lg-3">メールアドレス</label>
+        <div class="col-lg-3">
+          <%= f.text_field :email,autoforcus: true, autocomplete: "email",  placeholder: "sample@exanple.com" %>
+        </div>
+      </div><br>
+
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-9 d-flex justify-content-between">
+        <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
+        <%= link_to '退会する', withdraw_exective_exectives_path, method: :get, class: 'btn btn-danger btn-lg' %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>

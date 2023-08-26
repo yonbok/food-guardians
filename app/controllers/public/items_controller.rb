@@ -3,8 +3,16 @@ class Public::ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update]
 
   def index
-    @items = Item.all.page(params[:page])
     @genres = Genre.all
+    if params[:genre_id].present?
+      @items = Item.where(genre_id: params[:genre_id], is_active: true)
+    else
+      @items = Item.where(is_active: true)
+    end
+
+    if params[:search].present?
+      @items = @items.where('name LIKE ?', "%#{params[:search]}%")
+    end
   end
 
   def show
