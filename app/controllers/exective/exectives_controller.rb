@@ -3,7 +3,6 @@ class Exective::ExectivesController < ApplicationController
   def show
     @exective = current_exective
     @exectives = Exective.all
-    @orders = Order.all
   end
 
   def edit

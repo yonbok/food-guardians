@@ -7,7 +7,7 @@
     <div class="col-md-8">
 
       <h2 class="text-center mb-4">登録情報</h2>
-      <%= link_to '登録情報編集',  edit_customer_registration_path(@customer), class: "btn btn-success mb-4" %>
+      <%= link_to '登録情報編集',  edit_customer_path(@customer), class: "btn btn-success mb-4" %>
 
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -44,7 +44,6 @@
       <% if @orders.present? %>
       <%= link_to '注文履歴一覧表示', orders_path, class: "btn btn-info mb-4" %>
       <% end %>
-      <%= link_to '退会する', withdraw_customers_path, method: :get, class: 'btn btn-danger btn-lg' %>
     </div>
     <div class="col-md-2"></div>
   </div>

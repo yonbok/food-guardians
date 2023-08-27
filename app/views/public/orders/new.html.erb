@@ -38,21 +38,6 @@
             </div>
           </div>
 
-      <!-- 登録されたaddressから選んでもらう場合 -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <%= f.radio_button :address_number, 2, class: "form-check-input" %>
-            <%= f.label :address_number, "登録済住所から選択", class: "form-check-label" %>
-          </div>
-          <div class="card-body">
-            <div style="max-height:200px; overflow-y: scroll;">
-              <!-- registered として current_customer.address.all で取得した id を送る。
-                   ユーザーに表示して選択してもらうのは address  -->
-              <%= f.select :registered, options_from_collection_for_select(current_customer.addresses.all, :id, :address, :registered), {}, {class: "form-control"} %>
-            </div>
-          </div>
-        </div>
-
 
         <!-- 新しい住所を追加する場合 -->
         <div class="card mb-3">
