@@ -4,6 +4,7 @@ class Public::AddressesController < ApplicationController
 
   def index
     @addresses = current_customer.addresses
+    @cart_item = CartItem(@cart_item)
     @address = Address.new
   end
 

@@ -5,7 +5,7 @@
       <h2>配送先登録/一覧</h2>
       <div class="table-responsive">
        <table class="table table-bordered">
-        <%= form_with model: @address, url: cart_item_addresses_path, method: :get,local: true do |f| %>
+        <%= form_with model: @address, url: cart_item_addresses_path, method: :post,local: true do |f| %>
           <div class="form-group">
             <%= f.label :postcode, "郵便番号(ハイフンなし)" %>
             <%= f.text_field :postcode %>

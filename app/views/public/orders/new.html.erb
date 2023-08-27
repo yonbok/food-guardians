@@ -2,18 +2,18 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
       <h2 class="text-center">ご注文情報入力</h2>
-      <%= form_with model: @order, url: confirm_cart_item_orders_path, local: true do |f| %>
+      <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
         <div class="form-group">
           <h3>お支払い方法</h3>
           <!-- クレジットカード支払い -->
           <div class="form-check">
-            <%= f.radio_button :payment, Order.payment_methods.key(0), checked: "checked", class: "form-check-input" %>
-            <%= f.label :payment_credit_card, Order.payment_methods[:credit_card], class: "form-check-label" %>
+            <%= f.radio_button :payment, Order.payments.key(0), checked: "checked", class: "form-check-input" %>
+            <%= f.label :payment_credit_card, 'クレジットカード', class: "form-check-label" %>
           </div>
           <!-- 代引き(cash on delivery)支払い -->
           <div class="form-check">
-            <%= f.radio_button :payment, Order.payment_methods.key(1), class: "form-check-input" %>
-            <%= f.label :payment_cod, Order.payment_methods[:cod], class: "form-check-label" %>
+            <%= f.radio_button :payment, Order.payments.key(1), class: "form-check-input" %>
+            <%= f.label :payment_cod, "代引き", class: "form-check-label" %>
           </div>
         </div>
 

@@ -27,7 +27,7 @@ class Public::OrdersController < ApplicationController
           order_detail.save
         end
         flash[:notice] = "ご注文が確定しました。"
-        redirect_to complete_cart_item_orders_path
+        redirect_to complete_orders_path
         cart_items.destroy_all
       # ユーザーに関連するカートのデータ(購入したデータ)をすべて削除(カートを空にする)
       else
@@ -46,7 +46,7 @@ class Public::OrdersController < ApplicationController
         @order.name = current_customer.name
         @order.address = current_customer.address
         @order.postcode = current_customer.post_code
-        @order.customer_id = current_customer.id
+        #@order.customer_id = current_customer.id
       elsif params[:order][:address_number] == "2"
       # view で定義している address_number が"2"だったときにこの処理を実行
         if Address.exists?(name: params[:order][:registered])
@@ -54,7 +54,7 @@ class Public::OrdersController < ApplicationController
           @order.name = Address.find(params[:order][:registered]).name
           @order.address = Address.find(params[:order][:registered]).address
           @order.postcode = Address.find(params[:order][:registered]).postcode
-          @order.customer_id = Address.find(params[:order][:registered]).customer_id
+          #@order.customer_id = Address.find(params[:order][:registered]).customer_id
         else
           #render :new
       # 既存のデータを使っているためあり得ないとは思うが、万が一データが足りない場合は new を renderする
@@ -68,7 +68,7 @@ class Public::OrdersController < ApplicationController
       # ここに渡ってくるデータはユーザーで新規追加してもらうので、入力不足の場合は new に戻す
         end
       else
-        redirect_to  cart_item_addresses_path # 万が一当てはまらないデータが渡ってきた場合の処理
+        render :new # 万が一当てはまらないデータが渡ってきた場合の処理
       end
       @cart_items = current_customer.cart_items.all # カートアイテムの情報をユーザーに確認してもらうために使用
       @total = 0
@@ -80,6 +80,8 @@ class Public::OrdersController < ApplicationController
 
      def index
        @orders = current_customer.orders
+       @order_details = OrderDetail.where(order_id: @orders.ids)
+       @cart_item = CartItem.all
      end
 
     def show

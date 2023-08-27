@@ -16,7 +16,7 @@
           <td>〒<%= order.postcode %>&nbsp;<%= order.address %><br><%= order.name %></td>
           <td>
             <% order.order_details.each do |order_detail| %>
-              <%= order_details.item.name %><br>
+              <%= order_detail.item.name %><br>
             <% end %>
           </td>
           <td>
@@ -25,11 +25,11 @@
             <% end %>
           </td>
           <td>
-          <%#= I18n.t("enums.order.order_status.#{order.order_status}") %>
-          <%= order.payment_method_i18n %>
+          <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
+          <%= order.payment_i18n %>
           </td>
           <td>
-          <%= link_to "表示する", cart_item_order_path(order), class: "btn btn-primary" %>
+          <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>
           </td>
         </tr>
       <% end %>

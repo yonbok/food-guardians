@@ -45,7 +45,8 @@
 
        <div class="row">
         <h3><strong>支払方法</strong></h3>&emsp;
-         <h4><%= t("enums.order.payment.#{@order.payment}") %></h4><br>
+         <h4>
+          <%= @order.payment_i18n %></h4><br>
        </div>
        <br>
        <div class="row">
@@ -54,7 +55,7 @@
        </div>
        <br>
        <div align="center">
-        <%= form_with model: @order, url: cart_item_orders_path, method: :post, local: true do |f| %>
+        <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
          <%= f.hidden_field :customer_id %>
          <%= f.hidden_field :postcode %>
          <%= f.hidden_field :payment %>

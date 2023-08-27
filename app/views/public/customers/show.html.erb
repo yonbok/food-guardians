@@ -37,10 +37,14 @@
           </tr>
         </table>
       </div>
-
-      <%= link_to '配送先一覧表示', cart_item_addresses_path(@address), class: "btn btn-info mb-4" %>
-      <%= link_to '注文履歴一覧表示', cart_item_orders_path(@orders), class: "btn btn-info mb-4" %>
-
+      <% if @cart_item.present? %>
+        <%= link_to '配送先一覧表示', cart_item_addresses_path(@cart_item), class: "btn btn-info mb-4" %>
+      <% end %>
+      <%# @orders.each do |order| %>
+      <% if @orders.present? %>
+      <%= link_to '注文履歴一覧表示', orders_path, class: "btn btn-info mb-4" %>
+      <% end %>
+      <%= link_to '退会する', withdraw_customers_path, method: :get, class: 'btn btn-danger btn-lg' %>
     </div>
     <div class="col-md-2"></div>
   </div>

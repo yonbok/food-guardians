@@ -180,7 +180,7 @@ ja:
     pm: 午後
   enums:
     order:
-      payment_method:
+      payment:
         credit_card: "クレジットカード"
         cod: "代引き"
       order_status:
