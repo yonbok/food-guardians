@@ -4,18 +4,13 @@ class Public::ItemsController < ApplicationController
 
   def index
     @genres = Genre.all
+    @items = Item.where(is_active: true)
+
     if params[:genre_id].present?
-      @items = Item.where(genre_id: params[:genre_id], is_active: true)
-      @items = Item.page(params[:page])
-    else
-      @items = Item.where(is_active: true)
-      @items = Item.page(params[:page])
+      @items = @items.where(genre_id: params[:genre_id])
     end
 
-    if params[:search].present?
-      @items = @items.where('name LIKE ?', "%#{params[:search]}%")
-      @items = Item.page(params[:page])
-    end
+    @items = @items.page(params[:page])
   end
 
   def show
