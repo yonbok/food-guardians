@@ -6,12 +6,15 @@ class Public::ItemsController < ApplicationController
     @genres = Genre.all
     if params[:genre_id].present?
       @items = Item.where(genre_id: params[:genre_id], is_active: true)
+      @items = Item.page(params[:page])
     else
       @items = Item.where(is_active: true)
+      @items = Item.page(params[:page])
     end
 
     if params[:search].present?
       @items = @items.where('name LIKE ?', "%#{params[:search]}%")
+      @items = Item.page(params[:page])
     end
   end
 

@@ -5,5 +5,5 @@
     退会する場合は、「退会する」をクリックしてください。
   </p>
 
-  <%= link_to "退会しない", exective_items_path, :class => "btn btn-primary ms-3" %>
+  <%= link_to "退会しない", exective_items_path, method: :get, :class => "btn btn-primary ms-3" %>
   <%= link_to "退会する", withdraw_update_exective_exectives_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
