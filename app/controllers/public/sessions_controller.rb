@@ -7,6 +7,13 @@ class Public::SessionsController < Devise::SessionsController
     flash[:notice] = 'ログインに成功しました'
     items_path(resource)
   end
+
+  def guest_sign_in
+    customer = Customer.guest
+    sign_in customer
+    redirect_to items_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -30,12 +37,6 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  def guest_sign_in
-    customer = Customer.guest
-    sign_in customer
-    redirect_to items_path, notice: 'ゲストユーザーとしてログインしました。'
-  end
-
 
   protected
 

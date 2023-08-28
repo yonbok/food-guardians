@@ -16,6 +16,11 @@ class Exective < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |exective|
       exective.password = SecureRandom.urlsafe_base64
+      exective.name = "経営者ゲスト"
+      exective.kana_name = "ケイエイシャゲスト"
+      exective.phone_number = "10101010101"
+      exective.post_code = "1010101"
+      exective.address = "東京都江東区"
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
       # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
     end
