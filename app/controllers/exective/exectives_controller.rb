@@ -6,7 +6,7 @@ class Exective::ExectivesController < ApplicationController
   end
 
   def edit
-    @customer = current_exective
+    @exective = current_exective
   end
 
   def update
