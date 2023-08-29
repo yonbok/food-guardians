@@ -7,7 +7,6 @@
         <th>配送先</th>
         <th>注文商品</th>
         <th>支払金額</th>
-        <th>ステータス</th>
         <th>注文詳細</th>
       </tr>
       <% @orders.each do |order| %>
@@ -23,10 +22,6 @@
             <% order.order_details.each do |order_detail| %>
               <%= order.total_price.to_i %><br>
             <% end %>
-          </td>
-          <td>
-          <%= I18n.t("enums.order.order_status.#{order.order_status}") %>
-          <%= order.payment_i18n %>
           </td>
           <td>
           <%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %>
