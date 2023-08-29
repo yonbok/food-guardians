@@ -1,10 +1,13 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <div class="container">
   <div class="row justify-content-center">
     <%= image_tag('food-guardians_logo.png', size: "400x200") %>
   </div>
   <div class="row justify-content-center">
     <h3 class="text-center">
-      このサイトは食品ロスを減らすために作られました</br>
+      このサイトは食品ロスを減らすために作られました。</br>
       まだ使ったことのない方は今からぜひ会員登録を！
     </h3>
   </div>
@@ -15,12 +18,12 @@
   </div>
   <div class="row justify-content-center">
     <h5 class="text-center">
-      <%= link_to "消費者様登録はこちら", new_customer_registration_path, class: 'btn', style: 'background-color: #fcd575;' %>
+      <%= link_to "ご購入者様登録はこちら", new_customer_registration_path, class: 'btn', style: 'background-color: #fcd575;' %>
     </h5>
   </div>
   <div class="row justify-content-center">
     <h5 class="text-center">
-      <%= link_to "管理者様ログインはこちら", new_admin_session_path, class: 'btn', style: 'background-color: #fcd575;' %>
+      <%= link_to "管理者ログインはこちら", new_admin_session_path, class: 'btn', style: 'background-color: #fcd575;' %>
     </h5>
   </div>
   <div class="row justify-content-center">
