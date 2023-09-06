@@ -13,7 +13,7 @@ class Exective::ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.genre_id = 1 #仮実装
+    #@item.genre_id = 1 #仮実装
     if @item.save
       redirect_to exective_item_path(@item)
     else
@@ -25,11 +25,14 @@ class Exective::ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def edit; end
+  def edit
+    @item = Item.find(params[:id])
+  end
 
   def update
+    @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to exective_item_path(@item)
+      redirect_to exective_item_path(@item), notice: '商品が更新されました'
     else
       render :edit
     end

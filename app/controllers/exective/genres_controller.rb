@@ -29,6 +29,7 @@ class Exective::GenresController < ApplicationController
   end
 
   private
+
   def set_genre
     @genre = Genre.find(params[:id])
   end

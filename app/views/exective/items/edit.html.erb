@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <h3 class="text-center">商品編集</h3>
 <%= form_with model: [:exective, @item], local: true, class: 'col-6 mx-auto' do |f| %>
   <div class="form-group row">
