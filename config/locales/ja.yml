@@ -183,9 +183,3 @@ ja:
       payment:
         credit_card: "クレジットカード"
         cod: "代引き"
-      order_status:
-        waiting_for_payment: "入金待ち"
-        payment_confirmed: "入金確認"
-        in_production: "製作中"
-        preparing_to_ship: "発送準備中"
-        shipped: "発送済み"

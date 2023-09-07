@@ -46,20 +46,7 @@ class Public::OrdersController < ApplicationController
         @order.name = current_customer.name
         @order.address = current_customer.address
         @order.postcode = current_customer.post_code
-        #@order.customer_id = current_customer.id
       elsif params[:order][:address_number] == "2"
-      # view で定義している address_number が"2"だったときにこの処理を実行
-        if Address.exists?(name: params[:order][:registered])
-      # registered は viwe で定義している
-          @order.name = Address.find(params[:order][:registered]).name
-          @order.address = Address.find(params[:order][:registered]).address
-          @order.postcode = Address.find(params[:order][:registered]).postcode
-          #@order.customer_id = Address.find(params[:order][:registered]).customer_id
-        else
-          #render :new
-      # 既存のデータを使っているためあり得ないとは思うが、万が一データが足りない場合は new を renderする
-        end
-      elsif params[:order][:address_number] == "3"
       # view で定義している address_number が"3"だったときにこの処理を実行
         address_new = current_customer.addresses.new(address_params)
         if address_new.save
