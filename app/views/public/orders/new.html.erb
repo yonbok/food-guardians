@@ -22,7 +22,7 @@
           <h3>お届け先</h3>
           <div class="card mb-3">
             <div class="card-header">
-              <%= f.radio_button :address_number, 1 %> <!-- address_number と定義して1～3の番号を confirm に送る -->
+              <%= f.radio_button :address_number, 1 %> <!-- address_number と定義して1～2の番号を confirm に送る -->
               <%= f.label :address_number_1, "ご自身の住所" %>
             </div>
             <div class="card-body">
@@ -42,7 +42,7 @@
         <!-- 新しい住所を追加する場合 -->
         <div class="card mb-3">
           <div class="card-header">
-            <%= f.radio_button :address_number, 3, class: "form-check-input" %>
+            <%= f.radio_button :address_number, 2, class: "form-check-input" %>
             <%= f.label :address_number, "新しいお届け先", class: "form-check-label" %>
           </div>
           <div class="card-body">

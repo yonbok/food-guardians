@@ -12,7 +12,6 @@ class Public::OrdersController < ApplicationController
       cart_items = current_customer.cart_items.all
       # ログインユーザーのカートアイテムをすべて取り出して cart_items に入れる
       @order = current_customer.orders.new(order_params)
-      @order.order_status = 0
       if @order.save
         cart_items.each do |cart|
       # order_detail にも一緒にデータを保存する必要があるのでここで保存
@@ -21,8 +20,6 @@ class Public::OrdersController < ApplicationController
           order_detail.order_id = @order.id
           order_detail.quantity = cart.quantity
           order_detail.buy_price = cart.subtotal
-      # 購入が完了したらカート情報は削除するのでここに保存
-          #order_detail.buy_price = cart.item.buy_price
       # カート情報を削除するので item との紐付けが切れる前に保存
           order_detail.save
         end
@@ -47,7 +44,7 @@ class Public::OrdersController < ApplicationController
         @order.address = current_customer.address
         @order.postcode = current_customer.post_code
       elsif params[:order][:address_number] == "2"
-      # view で定義している address_number が"3"だったときにこの処理を実行
+      # view で定義している address_number が"2"だったときにこの処理を実行
         address_new = current_customer.addresses.new(address_params)
         if address_new.save
         else
@@ -79,7 +76,7 @@ class Public::OrdersController < ApplicationController
     private
 
     def order_params
-      params.require(:order).permit(:name, :address, :customer_id, :payment, :postcode, :order_status, :shipping_fee)
+      params.require(:order).permit(:name, :address, :customer_id, :payment, :postcode, :shipping_fee)
     end
 
     def order_detail_params
