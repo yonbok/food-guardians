@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <h2><%= @customer.name %>さんの会員ステータス編集</h2>
 
-  <%= form_with model: @customer, url: edit_admin_customer_path(@customer), method: :patch, local: true do |f| %>
+  <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch, local: true do |f| %>
     <% render "admin/shared/error_messages", resource: @customer %>
 
       <h5><%= f.label :is_deleted, '会員ステータス', class: 'col-sm-3 col-form-label' %></h5>
