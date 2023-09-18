@@ -23,17 +23,14 @@
 - 朝ご飯を買って済ませたいとき
 ​
 ## 設計書
+- ER図  https://app.diagrams.net/#G1Ly1D5KIt0_tr9lykplZCdV-L44TwgSKT
+- テーブル定義書  https://docs.google.com/spreadsheets/d/1PguWPYgXjgaFNXeqvH7LVITbIRAZb-CC9jG2CdfLiT0/edit?usp=sharing
 
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux release 2 (Karoo)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
-折りたたむ
